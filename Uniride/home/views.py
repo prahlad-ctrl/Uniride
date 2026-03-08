@@ -49,7 +49,7 @@ def sign_up(request):
             return render(request, 'signup.html', {
                 'error': 'User already exists'
             })
-        account.objects.create(
+        Account.objects.create(
             user=user,
             college_name=college_name,
             branch_name=branch_name,
@@ -92,7 +92,7 @@ def dashboard(request):
 
 @login_required
 def show_rides(request):
-    queryset = publish_ride.objects.all()
+    queryset = PublishRide.objects.all()
 
     from_location = request.GET.get('from_location')
     to_location = request.GET.get('to_location')
@@ -135,11 +135,13 @@ def post_ride(request):
             to_where = request.POST.get("to_where")
             travel_date = request.POST.get("travel_date")
             travel_time = request.POST.get("travel_time")
-            publish_ride.objects.create(from_where=from_where,
-                                        vehicle_rider=request.user.account,
-                                        to_where=to_where,
-                                        date=travel_date,
-                                        time=travel_time )
+            PublishRide.objects.create(
+                from_where=from_where,
+                rider_account=request.user.account,
+                to_where=to_where,
+                date=travel_date,
+                time=travel_time,
+            )
             msg='ride Published'
             return render(request,'post_ride.html',{'msg':msg})   
     return render(request,'post_ride.html')
@@ -155,7 +157,7 @@ def publish_vehicle(request):
         except ObjectDoesNotExist:
             vehicle_model = request.POST.get("vehicle_model")
             vehicle_number = request.POST.get("vehicle_number")
-            vehicle.objects.create(
+            Vehicle.objects.create(
                 account_id=request.user.account,
                 vehicle_model=vehicle_model,
                 vehicle_number=vehicle_number
@@ -183,9 +185,11 @@ def logout(request):
 
 @login_required
 def rider_profile(request, ride_id):
-    ride = get_object_or_404(publish_ride, id=ride_id)
-    rider_account = ride.vehicle_rider
+    ride = get_object_or_404(PublishRide, id=ride_id)
+    rider_account = ride.rider_account
+    back_query = request.GET.urlencode()
     return render(request, 'rider_profile.html', {
         'ride': ride,
         'rider': rider_account,
+        'back_query':back_query
     })

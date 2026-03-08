@@ -1,11 +1,12 @@
 :root {
-    --bg: #f6f8fb;
+    --bg: #edf1f7;
     --surface: #ffffff;
     --text: #121212;
     --muted: #6b7280;
-    --line: #e5e7eb;
+    --line: #e2e8f0;
     --brand: #111827;
     --accent: #ffd24c;
+    --phone-width: 420px;
 }
 
 * {
@@ -14,10 +15,17 @@
 
 body {
     margin: 0;
-    padding: 24px 16px 40px;
+    min-height: 100vh;
+    padding: 18px 12px 30px;
     font-family: "Segoe UI", Tahoma, sans-serif;
-    background: linear-gradient(180deg, #fcfdff 0%, var(--bg) 100%);
+    background:
+        radial-gradient(circle at 5% 0%, #ffffff 0%, transparent 36%),
+        radial-gradient(circle at 95% 15%, #d9e4ff 0%, transparent 28%),
+        linear-gradient(180deg, #f9fbff 0%, var(--bg) 100%);
     color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1, h2, h3 {
@@ -34,42 +42,44 @@ p {
 }
 
 form {
-    max-width: 640px;
+    width: 100%;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 18px;
+    border-radius: 18px;
+    padding: 16px;
     margin: 14px 0 18px;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
 }
 
 .topbar {
-    max-width: 980px;
-    margin: 0 auto 14px;
+    width: min(var(--phone-width), 100%);
+    margin: 0 0 12px;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 14px 16px;
+    border-radius: 18px;
+    padding: 12px 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
 }
 
 .brand {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 800;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.1px;
 }
 
 .welcome {
     color: var(--muted);
-    font-size: 14px;
+    font-size: 13px;
     margin-top: 4px;
 }
 
 .page {
-    max-width: 980px;
-    margin: 0 auto;
+    width: min(var(--phone-width), 100%);
+    margin: 0;
 }
 
 .actions {
@@ -82,15 +92,16 @@ form {
 .card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 16px;
+    border-radius: 18px;
+    padding: 14px;
     margin-bottom: 14px;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
 }
 
 .ride-row {
     border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 10px 12px;
+    border-radius: 12px;
+    padding: 10px 11px;
     margin-bottom: 8px;
     background: #fff;
 }
@@ -99,20 +110,22 @@ form {
     display: flex;
     gap: 10px;
     margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .profile-section {
-    max-width: 980px;
-    margin: 0 auto 14px;
+    width: min(var(--phone-width), 100%);
+    margin: 0 0 12px;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 18px;
     padding: 14px;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
 }
 
 .profile-row {
     border: 1px solid var(--line);
-    border-radius: 10px;
+    border-radius: 12px;
     background: #fff;
     padding: 10px 12px;
     margin-bottom: 8px;
@@ -137,7 +150,7 @@ label {
 input {
     width: 100%;
     border: 1px solid var(--line);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 10px 12px;
     margin-top: 6px;
     margin-bottom: 12px;
@@ -152,7 +165,7 @@ input:focus {
 
 button {
     border: 0;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 10px 14px;
     font-size: 14px;
     font-weight: 600;
@@ -164,7 +177,7 @@ button {
 .btn-link {
     display: inline-block;
     border: 0;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 10px 14px;
     font-size: 14px;
     font-weight: 600;
@@ -198,7 +211,7 @@ a > button {
 
 @media (max-width: 640px) {
     body {
-        padding: 16px 12px 28px;
+        padding: 14px 10px 24px;
     }
 
     form {

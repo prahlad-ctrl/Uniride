@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rider Profile</title>
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+</head>
+<body>
+    <div class="topbar">
+        <div>
+            <div class="brand">UniRide</div>
+            <div class="welcome">Rider Profile</div>
+        </div>
+        <a href="{% url 'dashboard' %}" class="btn-link">Back to Dashboard</a>
+    </div>
+
+    <div class="profile-section">
+        <h2>Rider Information</h2>
+        <div class="profile-row"><div class="profile-key">Username</div><div class="profile-value">{{ rider.user.username }}</div></div>
+        <div class="profile-row"><div class="profile-key">First Name</div><div class="profile-value">{{ rider.user.first_name }}</div></div>
+        <div class="profile-row"><div class="profile-key">Last Name</div><div class="profile-value">{{ rider.user.last_name }}</div></div>
+        <div class="profile-row"><div class="profile-key">College</div><div class="profile-value">{{ rider.college_name }}</div></div>
+        <div class="profile-row"><div class="profile-key">Branch</div><div class="profile-value">{{ rider.branch_name }}</div></div>
+        <div class="profile-row"><div class="profile-key">Semester</div><div class="profile-value">{{ rider.sem }}</div></div>
+    </div>
+
+    <div class="profile-section">
+        <h2>Ride Information</h2>
+        <div class="profile-row"><div class="profile-key">From</div><div class="profile-value">{{ ride.from_where }}</div></div>
+        <div class="profile-row"><div class="profile-key">To</div><div class="profile-value">{{ ride.to_where }}</div></div>
+        <div class="profile-row"><div class="profile-key">Date</div><div class="profile-value">{{ ride.date }}</div></div>
+        <div class="profile-row"><div class="profile-key">Time</div><div class="profile-value">{{ ride.time }}</div></div>
+        <a href="#" class="btn-link">Chat Now</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniRide Dashboard</title>
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+</head>
+<body>
+    <div class="topbar">
+        <div>
+            <div class="brand">UniRide</div>
+            <div class="welcome">Welcome, {{ user.first_name|default:user.username }}</div>
+        </div>
+        <a href="{% url 'profile' %}"><button type="button">Profile</button></a>
+    </div>
+
+    <div class="page">
+    <div class="actions">
+        <a href="{% url 'register_vehicle' %}"><button type="button">Register Vehicle</button></a>
+        <a href="{% url 'post_ride' %}"><button type="button">Post Ride</button></a>
+    </div>
+
+    <form method="get" action="{% url 'show_rides' %}">
+        <h3>Find Riders</h3>
+        <label for="from_location">From</label><br>
+        <input
+            id="from_location"
+            name="from_location"
+            type="text"
+            value="{{ user.account.college_name }}"
+            readonly
+        ><br><br>
+
+        <button type="button" id="swap_btn">Swap</button><br><br>
+
+        <label for="to_location">To</label><br>
+        <input
+            id="to_location"
+            name="to_location"
+            type="text"
+            value="{{ user.account.personal_address }}"
+            readonly
+        ><br><br>
+
+        <label for="travel_date">Date</label><br>
+        <input id="travel_date" name="travel_date" type="date"><br><br>
+
+        <label for="travel_time">Time</label><br>
+        <input id="travel_time" name="travel_time" type="time"><br><br>
+
+        <button type="submit" >Search</button>
+    </form>
+
+    <div class="card">
+    <h2>Nearby Riders</h2>
+    <p>Click on Users Name to Visit their profile</p>
+    {% for ride in page_obj %}
+        <div class="ride-row">
+            <div><strong>Rider:</strong> <a href="{% url 'rider_profile' ride.id %}">
+            {{ ride.vehicle_rider.user.username }}
+            </a></div>
+            <div><strong>From:</strong> {{ ride.from_where }}</div>
+            <div><strong>To:</strong> {{ ride.to_where }}</div>
+            <div><strong>Date:</strong> {{ ride.date }}</div>
+            <div><strong>Time:</strong> {{ ride.time }}</div>
+        </div>
+    {% empty %}
+        <p>No riders found.</p>
+    {% endfor %}
+
+    <div class="pager">
+    {% if page_obj.has_previous %}
+        <a href="?from_location={{ request.GET.from_location }}&to_location={{ request.GET.to_location }}&travel_date={{ request.GET.travel_date }}&travel_time={{ request.GET.travel_time }}&page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+        <a href="?from_location={{ request.GET.from_location }}&to_location={{ request.GET.to_location }}&travel_date={{ request.GET.travel_date }}&travel_time={{ request.GET.travel_time }}&page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+    </div>
+    </div>
+    </div>
+
+    <script>
+        const fromInput = document.getElementById("from_location");
+        const toInput = document.getElementById("to_location");
+        const swapBtn = document.getElementById("swap_btn");
+
+        swapBtn.addEventListener("click", function () {
+            const currentFrom = fromInput.value;
+            fromInput.value = toInput.value;
+            toInput.value = currentFrom;
+        });
+    </script>
+</body>
+</html>

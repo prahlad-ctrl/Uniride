@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+</head>
+<body>
+    <div class="topbar">
+        <div>
+            <div class="brand">UniRide</div>
+            <div class="welcome">Profile</div>
+        </div>
+        <a href="{% url 'dashboard' %}" class="btn-link">Back to Dashboard</a>
+    </div>
+
+    <div class="profile-section">
+        <h2>Basic Information</h2>
+        <div class="profile-row"><div class="profile-key">Username</div><div class="profile-value">{{ user.username }}</div></div>
+        <div class="profile-row"><div class="profile-key">First Name</div><div class="profile-value">{{ user.first_name }}</div></div>
+        <div class="profile-row"><div class="profile-key">Last Name</div><div class="profile-value">{{ user.last_name }}</div></div>
+        <div class="profile-row"><div class="profile-key">Email</div><div class="profile-value">{{ user.email }}</div></div>
+        <div class="profile-row"><div class="profile-key">User ID</div><div class="profile-value">{{ user.id }}</div></div>
+    </div>
+
+    <div class="profile-section">
+        <h2>College Details</h2>
+        <div class="profile-row"><div class="profile-key">College Name</div><div class="profile-value">{{ account.college_name }}</div></div>
+        <div class="profile-row"><div class="profile-key">Branch Name</div><div class="profile-value">{{ account.branch_name }}</div></div>
+        <div class="profile-row"><div class="profile-key">Student ID</div><div class="profile-value">{{ account.student_id }}</div></div>
+        <div class="profile-row"><div class="profile-key">Year</div><div class="profile-value">{{ account.year }}</div></div>
+        <div class="profile-row"><div class="profile-key">Semester</div><div class="profile-value">{{ account.sem }}</div></div>
+    </div>
+
+    <div class="profile-section">
+        <h2>Contact Details</h2>
+        <div class="profile-row"><div class="profile-key">Phone Number</div><div class="profile-value">{{ account.phone_number }}</div></div>
+        <div class="profile-row"><div class="profile-key">Personal Address</div><div class="profile-value">{{ account.personal_address }}</div></div>
+    </div>
+
+    <form method="post" action="{% url 'logout' %}" class="profile-section">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>

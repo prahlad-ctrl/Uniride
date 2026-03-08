@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Ride</title>
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+</head>
+<body>
+    <h1>Post Ride</h1>
+    <a href="{% url 'dashboard' %}"><button type="button">Back to Dashboard</button></a><br><br>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="from_where">From</label><br>
+        <input type="text" id="from_where" name="from_where" required><br><br>
+
+        <label for="to_where">To</label><br>
+        <input type="text" id="to_where" name="to_where" required><br><br>
+
+        <label for="travel_date">Date</label><br>
+        <input type="date" id="travel_date" name="travel_date" required><br><br>
+
+        <label for="travel_time">Time</label><br>
+        <input type="time" id="travel_time" name="travel_time" required><br><br>
+
+        <button type="submit">Post Ride</button>
+    </form>
+</body>
+</html>

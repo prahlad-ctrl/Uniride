@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Vehicle</title>
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+</head>
+<body>
+    <h1>Register Vehicle</h1>
+    <a href="{% url 'dashboard' %}"><button type="button">Back to Dashboard</button></a><br><br>
+
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="vehicle_model">Vehicle Model</label><br>
+        <input type="text" id="vehicle_model" name="vehicle_model" required><br><br>
+
+        <label for="vehicle_number">Vehicle Number</label><br>
+        <input type="text" id="vehicle_number" name="vehicle_number" inputmode="numeric" pattern="[0-9]+" required><br><br>
+
+        <button type="submit">Register Vehicle</button>
+    </form>
+</body>
+</html>
